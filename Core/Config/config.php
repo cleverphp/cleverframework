@@ -1,5 +1,4 @@
 <?php
-namespace Core\Config;
 class config{
 
 	public function db(){
@@ -12,6 +11,19 @@ class config{
 			'psd'=>'admin',
 			'persistent'=>true
 		
+		];
+	
+	}
+	
+	public function core_dir(){
+
+		return [
+			'Config',
+			'Control',
+			'Func',
+			'Model',
+			'View',
+			'Public'
 		];
 	
 	}
