@@ -1,15 +1,12 @@
 <?php
 	
 	//reserve extends from Control,but could also do not like this as imulating python
-	class index{
-
-		public $view;
-
+	class index extends Control{
+		
+		//you must use this func to ini data
 		public function __construct(){
 			
-			global $view;
-
-			$this->view = $view;
+			parent::__construct();
 		
 		}
 

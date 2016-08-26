@@ -37,6 +37,29 @@ class db{
 	
 	}
 
+	public function query($sql){
+
+		$arr = array();
+
+		$res = self::$pdo->query($sql);
+		
+		if($res){
+			foreach($res as $v){
+
+				array_push($arr,$v);
+			
+			}
+		}
+
+		return $arr;
+
+	}
+
+	public function execute($sql){
+
+		return self::$pdo->exec($sql);
+
+	}
 
 }
 return new db;
