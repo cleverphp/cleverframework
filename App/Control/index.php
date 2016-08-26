@@ -13,6 +13,15 @@
 		public function index(){
 
 			$this->view->assign('hello','hello world');
+			
+			/**
+			$sql = "select * from hello";
+
+			$res = $this->db->query($sql);
+
+			$this->view->assign('res',$res);
+
+			**/
 
 			$this->view->display('index.tpl');
 		

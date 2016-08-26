@@ -1,5 +1,8 @@
 <?php
 
+	//you should pay attention to include module only once,but you can use module many times.
+	//THIS FRAMEWORK DESIGN MAINLY REFERENCE PYTHON MODULE CLASS
+
 	define('DS',DIRECTORY_SEPARATOR);
 
 	define('ROOT',$_SERVER['DOCUMENT_ROOT']);
