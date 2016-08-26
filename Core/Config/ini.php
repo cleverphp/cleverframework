@@ -83,7 +83,7 @@ class ini{
 
 	    $req = req();
 		
-		$ctrl = include_once(CTRL.$req['c']);
+		$ctrl = include_once(CTRL.$req['c'].'.php');
 
 		$ctrl->$req['a']();
 	

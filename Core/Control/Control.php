@@ -1,9 +1,8 @@
 <?php
 class Control{
+
+	//define some public class func here
 	
 
-
-
 }
-return new Control;
 ?>
