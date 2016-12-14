@@ -38,6 +38,8 @@ class db{
 	}
 
 	public function query($sql){
+		
+		$sql = mysql_real_escape_string($sql,self::$pdo);
 
 		$arr = array();
 
@@ -56,6 +58,8 @@ class db{
 	}
 
 	public function execute($sql){
+		
+		$sql = mysql_real_escape_string($sql,self::$pdo);
 
 		return self::$pdo->exec($sql);
 
