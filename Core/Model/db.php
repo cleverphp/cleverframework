@@ -56,8 +56,9 @@ class db{
 	}
 
 	public function execute($sql){
-
-		return self::$pdo->exec($sql);
+		
+		//do not use the return value,value represent the lines affected while not means whether the results is success or fail
+		return self::$pdo->exec($sql);//return the affected rows,at the most time,successful means return not 0,that says 0 is fail except for empty exec()
 
 	}
 
