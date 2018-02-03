@@ -85,7 +85,7 @@ class ini{
 		
 		$ctrl = include_once(CTRL.$req['c'].'.php');
 
-		$ctrl->$req['a']();
+		call_user_func(array($ctrl,$req['a']));
 	
 	}
 

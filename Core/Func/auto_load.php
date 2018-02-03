@@ -13,6 +13,6 @@
 
 	}
 
-	spl_register_autoload('cleverAutoLoad');
+	spl_autoload_register('cleverAutoLoad');
 
 ?>

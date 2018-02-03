@@ -7,8 +7,8 @@ class config{
 			
 			'host'=>'localhost',
 			'dbname'=>'test',
-			'user'=>'root',
-			'psd'=>'admin',
+			'user'=>'test',
+			'psd'=>'test',
 			'persistent'=>true
 		
 		];
