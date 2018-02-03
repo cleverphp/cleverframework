@@ -5,13 +5,17 @@
 
 	define('DS',DIRECTORY_SEPARATOR);
 
-	define('ROOT',$_SERVER['DOCUMENT_ROOT']);
+	define('ROOT',dirname(__FILE__));
+
+	//define the application dir,if admin just say 'admin'
 
 	define('APP','App');
 
 	define('CTRL',ROOT.DS.APP.DS.'Control'.DS);
 
 	define('SMARTY',ROOT.DS.'Core'.DS.'libs'.DS);
+
+	//all variable from include can take as Module/has attributes and funcs
 
 	$config = include('Core/Config/config.php');
 

@@ -23,6 +23,10 @@ class db{
 	
 	public function connect(){
 
+		if(self::$pdo instanceof PDO){
+			return;
+		}
+
 		$dsn = "mysql:host=".$this->host.";dbname=".$this->dbname;
 
 		try{
@@ -41,7 +45,7 @@ class db{
 
 		$arr = array();
 
-		$res = self::$pdo->query($sql);
+		$res = self::$pdo->query($sql,PDO::FETCH_ASSOC);
 		
 		if($res){
 			foreach($res as $v){
