@@ -27,6 +27,6 @@
 	
 	$ctrl = include('Core/Control/Control.php');
 
-	$ini = include('Core/Config/ini.php');
+	$ini = include('Core/Config/ini.php'); //此处设置类自动加载以及路由
 
 	$ini->run();

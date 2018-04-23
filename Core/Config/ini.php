@@ -3,33 +3,31 @@ class ini{
 
 	public function run(){
 
-		$this->check();
-		$this->set();
+		$this->registerAutoLoad();
+		$this->set(); //set route
 		$this->mysql();
 		$this->start();
 	
 	}
 
-	private function check(){
+	private function registerAutoLoad(){
 
-		if(!defined('APP') || !is_dir(ROOT.DS.APP)):
-			exit('You need define your app path first');
-		endif;
+		spl_autoload_register(function($class){
 
-		global $config;
+			$name = ucfirst(strtolower($class));
+			//优先加载核心类
+			if(file_exists(ROOT.DS.'Core'.DS.'Control'.DS.$name.'.php')){
+				@include_once(ROOT.DS.'Core'.DS.'Control'.DS.$name.'.php');
+			}elseif(file_exists(ROOT.DS.APP.DS.'Control'.DS.$name.'.php')){
+				@include_once(ROOT.DS.APP.DS.'Control'.DS.$name.'.php');
+			}elseif(file_exists(ROOT.DS.'Core'.DS.'ExtLib'.DS.$name.'.php')){ //加载第三方类
+				@include_once(ROOT.DS.'Core'.DS.'ExtLib'.DS.$name.'.php');
+			}else{
+				trigger_error("class ".$name." is not found in core control,app control,ExtLib",E_USER_ERROR);
+			}
 
-		$dir = $config->core_dir();
+		});
 
-		foreach($dir as $v):
-
-			if(!is_dir(ROOT.DS.APP.DS.$v)):
-
-				mkdir(ROOT.DS.APP.DS.$v);
-
-			endif;
-		
-		endforeach;
-	
 	}
 
 	private function set(){

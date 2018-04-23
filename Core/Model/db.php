@@ -23,6 +23,8 @@ class db{
 	
 	public function connect(){
 
+		//singleton pattern
+
 		if(self::$pdo instanceof PDO){
 			return;
 		}
@@ -35,34 +37,35 @@ class db{
 
 		}catch(PDOException $e){
 			
-			exit("db error ".$e->getMessage());
+			//exit("db error ".$e->getMessage());
 		
 		}
 	
 	}
 
-	public function query($sql){
+	public function query($sql,$data){
 
-		$arr = array();
+		$stmp = self::$pdo->prepare($sql);
 
-		$res = self::$pdo->query($sql,PDO::FETCH_ASSOC);
+		$stmp->execute($data);
+
+		$res = $stmp->fetchAll(PDO::FETCH_ASSOC);
 		
-		if($res){
-			foreach($res as $v){
-
-				array_push($arr,$v);
-			
-			}
-		}
-
-		return $arr;
+		return $res;
 
 	}
 
-	public function execute($sql){
+	public function execute($sql,$data,$getInsertId=false){
 		
-		//do not use the return value,value represent the lines affected while not means whether the results is success or fail
-		return self::$pdo->exec($sql);//return the affected rows,at the most time,successful means return not 0,that says 0 is fail except for empty exec()
+		$stmp = self::$pdo->prepare($sql);
+
+		$res = $stmp->execute($data);
+
+		if($getInsertId){
+			return self::$pdo->lastInsertId();
+		}
+
+		return $res;
 
 	}
 
