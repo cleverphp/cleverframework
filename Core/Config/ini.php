@@ -22,6 +22,24 @@ class ini{
 				@include_once(ROOT.DS.APP.DS.'Control'.DS.$name.'.php');
 			}elseif(file_exists(ROOT.DS.'Core'.DS.'ExtLib'.DS.$name.'.php')){ //加载第三方类
 				@include_once(ROOT.DS.'Core'.DS.'ExtLib'.DS.$name.'.php');
+			}elseif(strpos(strtolower($class), 'smarty') === 0){ //载入smarty
+
+				$rootClasses = array('smarty' => 'Smarty.class.php', 'smartybc' => 'SmartyBC.class.php',);
+				$_class = strtolower($class);
+				$file = SMARTY . 'sysplugins' . DS . $_class . '.php';
+				
+		        if (is_file($file)) {
+
+		            include_once $file;
+		        } else if (isset($rootClasses[ $_class ])) {
+		            $file = SMARTY . $rootClasses[ $_class ];
+		            if (is_file($file)) {
+		                include_once $file;
+		            }
+		        }else{
+		        	trigger_error("class ".$name." is not found in core control,app control,ExtLib",E_USER_ERROR);
+		        }
+
 			}else{
 				trigger_error("class ".$name." is not found in core control,app control,ExtLib",E_USER_ERROR);
 			}

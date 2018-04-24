@@ -5,36 +5,53 @@
 		$req = array();
 
 		$uri = $_SERVER['REQUEST_URI'];
+
+		$count_len = count(explode('/',$uri));
+
+		if($count_len == 2):
 		
-		$preg = "/c=([^&]*)/";
+			$preg = "/c=([^&]*)/";
 
-		preg_match_all($preg,$uri,$arr);
+			preg_match_all($preg,$uri,$arr);
 
-		if(count($arr[0]) == 0){
+			if(count($arr[0]) == 0){
+				
+				$req['c'] = 'index';
+
+			}else{
+
+				$req['c'] = $arr[1][0];
 			
-			$req['c'] = 'index';
+			}
 
-		}else{
+			$preg = "/a=([^&]*)/";
 
-			$req['c'] = $arr[1][0];
-		
-		}
+			preg_match_all($preg,$uri,$brr);
 
-		$preg = "/a=([^&]*)/";
+			if(count($brr[0]) == 0){
+				
+				$req['a'] = 'index';
 
-		preg_match_all($preg,$uri,$brr);
+			}else{
 
-		if(count($brr[0]) == 0){
+				$req['a'] = $brr[1][0];
 			
-			$req['a'] = 'index';
+			}
 
-		}else{
+			return $req;
+		elseif($count_len == 3):
+			$route_uri = explode('/',$uri);
 
-			$req['a'] = $brr[1][0];
-		
-		}
+			$req['c'] = $route_uri[1];
+			$req['a'] = explode('?',$route_uri[2]);
 
-		return $req;
+			$req['a'] = is_array($req['a']) ? $req['a'][0] : $req['a'];
+
+			return $req;
+
+		else:
+			exit('Bad Request!');
+		endif;
 	
 	}
 
